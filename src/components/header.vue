@@ -10,7 +10,7 @@
         <span>运行</span>
       </Button>
       <Button type="text" @click="clickhandle('reset')">
-        <Icon type="ios-play-outline" class="btn-icon" />
+        <Icon type="ios-refresh" class="btn-icon" />
         <span>重置</span>
       </Button>
     </div>
