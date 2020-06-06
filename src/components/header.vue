@@ -5,17 +5,17 @@
       <span>vue-running</span>
     </div>
     <div class="operation">
-      <Button type="text" @click="run">
+      <Button type="text" @click="clickhandle('run')">
         <Icon type="ios-play-outline" class="btn-icon" />
         <span>运行</span>
       </Button>
-      <Button type="text"  @click="reset">
+      <Button type="text" @click="clickhandle('reset')">
         <Icon type="ios-play-outline" class="btn-icon" />
         <span>重置</span>
       </Button>
     </div>
     <div class="help">
-       <Button type="text" @click="help">
+      <Button type="text" @click="clickhandle('help')">
         <Icon type="ios-help-circle-outline" class="btn-icon" />
       </Button>
     </div>
@@ -27,7 +27,11 @@ export default {
   data() {
     return {};
   },
-  methods: {},
+  methods: {
+    clickhandle(type) {
+      this.$emit(type);
+    }
+  },
   mounted() {}
 };
 </script>
