@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "element-ui": "^2.13.2",
+    "view-design": "^4.2.0",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0"
   },
