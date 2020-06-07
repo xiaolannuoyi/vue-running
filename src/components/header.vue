@@ -15,9 +15,16 @@
       </Button>
     </div>
     <div class="help">
-      <Button type="text" @click="clickhandle('help')">
-        <Icon type="ios-help-circle-outline" class="btn-icon" />
-      </Button>
+      <Tooltip placement="bottom-end">
+        <div slot="content">
+          <p>当前 iView 版本为 4.2.0</p>
+          <p>当前 Element 版本为 2.13.2</p>
+          <p>可运行.vue 文件</p>
+        </div>
+        <Button type="text">
+          <Icon type="ios-help-circle-outline" class="btn-icon" />
+        </Button>
+      </Tooltip>
     </div>
   </div>
 </template>
@@ -25,7 +32,8 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+    };
   },
   methods: {
     clickhandle(type) {

@@ -31,3 +31,13 @@ import 'codemirror/addon/fold/foldgutter.js'
 import 'codemirror/addon/fold/indent-fold.js'
 import 'codemirror/addon/fold/markdown-fold.js'
 import 'codemirror/addon/fold/xml-fold.js'
+//hint
+import 'codemirror/addon/hint/javascript-hint'
+import 'codemirror/addon/hint/html-hint'
+import 'codemirror/addon/hint/css-hint'
+import 'codemirror/addon/hint/show-hint'
+import 'codemirror/addon/hint/anyword-hint'
+import 'codemirror/addon/hint/show-hint.css'
+//
+import 'codemirror/addon/edit/closebrackets.js'
+
