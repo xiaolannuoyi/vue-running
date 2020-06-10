@@ -77,9 +77,11 @@ export default {
     },
     reset() {
       console.log("reset");
-      this.code = codeTemplate;
       this.$refs.runcode.destroyCode();
-      this.$refs.runcode.renderCode();
+      this.code = codeTemplate;
+      this.$nextTick(() => {
+        this.$refs.runcode.renderCode();
+      });
     },
     onCmReady(cm) {
       cm.on("keypress", () => {
