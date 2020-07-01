@@ -9,13 +9,17 @@ const routes = [
     path: "/",
     name: "vueRunning",
     component: vueRunning
+  },
+  {
+    path: "/:codename",
+    name: "vueRunning",
+    component: vueRunning
   }
 ];
 
 const router = new VueRouter({
   mode: "history",
-  base: process.env.BASE_URL,
+  base: "vue-running", //process.env.BASE_URL
   routes
 });
-
 export default router;

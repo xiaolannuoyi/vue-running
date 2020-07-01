@@ -8070,6 +8070,11 @@ v-click-outside-x@^3.7.1:
   resolved "https://registry.npm.taobao.org/v-click-outside-x/download/v-click-outside-x-3.7.1.tgz#aa03eaa0e41e44cb5207dcf86c2d9f0dd64084c1"
   integrity sha1-qgPqoOQeRMtSB9z4bC2fDdZAhME=
 
+v-click-outside@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.npm.taobao.org/v-click-outside/download/v-click-outside-3.0.1.tgz#95870c199726069f4eda7eb5781ade62526dd269"
+  integrity sha1-lYcMGZcmBp9O2n61eBreYlJt0mk=
+
 v8-compile-cache@^2.0.3:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/v8-compile-cache/-/v8-compile-cache-2.1.1.tgz#54bc3cdd43317bca91e35dcaf305b1a7237de745"

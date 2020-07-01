@@ -14,7 +14,12 @@
           @ready="onCmReady"
         ></codemirror>
         <!-- 展示 -->
-        <run-code slot="right" class="demo-split-pane" :code="code" ref="runcode"></run-code>
+        <run-code
+          slot="right"
+          class="demo-split-pane"
+          :code="code"
+          ref="runcode"
+        ></run-code>
       </Split>
     </div>
   </div>
@@ -25,7 +30,7 @@
 import runHeader from "@/components/header";
 import runCode from "@/components/runCode";
 //code模版
-import codeTemplate from "@/components/codeMirror/codeTemplate.js";
+import { codeList } from "@/components/codeList/index";
 //vue-codemirror相关
 import { codemirror } from "vue-codemirror";
 import "@/components/codeMirror/index.js";
@@ -41,7 +46,7 @@ export default {
   data() {
     return {
       split: 0.5,
-      code: codeTemplate,
+      code: "",
       cmOptions: {
         mode: "htmlmixed",
         lineNumbers: true, //行号
@@ -69,6 +74,7 @@ export default {
       }
     };
   },
+
   methods: {
     run() {
       console.log("run");
@@ -91,6 +97,9 @@ export default {
     }
   },
   mounted() {
+    let name = this.$route.params.codename;
+    this.code = name ? codeList[name] : codeList["template"];
+    console.log("this.code", this.code);
     //解决嵌套使用codemirror时，点击才会显示的问题。
     setTimeout(() => {
       this.$refs.mycodemirror.codemirror.refresh();

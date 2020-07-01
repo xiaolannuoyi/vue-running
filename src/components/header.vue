@@ -31,9 +31,9 @@
 
 <script>
 export default {
+  name: "runHeader",
   data() {
-    return {
-    };
+    return {};
   },
   methods: {
     clickhandle(type) {

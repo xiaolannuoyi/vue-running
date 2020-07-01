@@ -6,6 +6,7 @@
 import Vue from "vue";
 import { randomStr } from "@/utils/random_str.js";
 export default {
+  name: "runCode",
   data() {
     return {
       id: randomStr(),
