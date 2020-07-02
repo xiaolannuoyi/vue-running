@@ -14,12 +14,9 @@
           @ready="onCmReady"
         ></codemirror>
         <!-- 展示 -->
-        <run-code
-          slot="right"
-          class="demo-split-pane"
-          :code="code"
-          ref="runcode"
-        ></run-code>
+        <div slot="right" class="demo-split-pane">
+          <run-code v-if="runCodeHash" :code="code" ref="runcode"></run-code>
+        </div>
       </Split>
     </div>
   </div>
@@ -27,8 +24,8 @@
 
 <script>
 // @ is an alias to /src
-import runHeader from "@/components/header";
-import runCode from "@/components/runCode";
+import runHeader from "@/components/runCode/header";
+import runCode from "@/components/runCode/runCode";
 //code模版
 import { codeList } from "@/components/codeList/index";
 //vue-codemirror相关
@@ -37,7 +34,7 @@ import "@/components/codeMirror/index.js";
 import "@/components/codeMirror/myCodeMirror.css";
 
 export default {
-  name: "Home",
+  name: "vueRunning",
   components: {
     runHeader,
     runCode,
@@ -46,6 +43,7 @@ export default {
   data() {
     return {
       split: 0.5,
+      initcode: "",
       code: "",
       cmOptions: {
         mode: "htmlmixed",
@@ -71,35 +69,42 @@ export default {
         extraKeys: {
           "Ctrl-Q": "autocomplete"
         }
-      }
+      },
+      runCodeHash: true
     };
   },
-
   methods: {
     run() {
-      console.log("run");
       this.$refs.runcode.destroyCode();
       this.$refs.runcode.renderCode();
     },
     reset() {
-      console.log("reset");
       this.$refs.runcode.destroyCode();
-      this.code = codeTemplate;
+      this.code = this.initcode;
       this.$nextTick(() => {
         this.$refs.runcode.renderCode();
       });
     },
     onCmReady(cm) {
       cm.on("keypress", () => {
-        console.log("keypress");
         cm.showHint();
       });
     }
   },
-  mounted() {
-    let name = this.$route.params.codename;
-    this.code = name ? codeList[name] : codeList["template"];
-    console.log("this.code", this.code);
+  watch: {
+    $route: {
+      handler(val) {
+        let name = val.params.codename;
+        this.code = this.initcode = codeList[name];
+        this.runCodeHash = false;
+        this.$nextTick(() => {
+          this.runCodeHash = true;
+        });
+      },
+      immediate: true
+    }
+  },
+  created() {
     //解决嵌套使用codemirror时，点击才会显示的问题。
     setTimeout(() => {
       this.$refs.mycodemirror.codemirror.refresh();

@@ -7,8 +7,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: "vueRunning",
-    component: vueRunning
+    redirect: "/template"
   },
   {
     path: "/:codename",
