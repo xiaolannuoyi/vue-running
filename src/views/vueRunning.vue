@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <!-- 头部 -->
-    <run-header @run="run" @reset="reset"></run-header>
+    <run-header @run="run" @reset="reset" @copy="copy"></run-header>
     <div class="demo-split">
       <Split v-model="split">
         <!-- 代码 -->
@@ -32,6 +32,8 @@ import { codeList } from "@/components/codeList/index";
 import { codemirror } from "vue-codemirror";
 import "@/components/codeMirror/index.js";
 import "@/components/codeMirror/myCodeMirror.css";
+
+import clip from "@/utils/clipboard.js";
 
 export default {
   name: "vueRunning",
@@ -84,6 +86,9 @@ export default {
       this.$nextTick(() => {
         this.$refs.runcode.renderCode();
       });
+    },
+    copy(event) {
+      clip(this.code, event);
     },
     onCmReady(cm) {
       cm.on("keypress", () => {

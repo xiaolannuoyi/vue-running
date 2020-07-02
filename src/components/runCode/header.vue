@@ -1,17 +1,21 @@
 <template>
   <div class="header">
     <div class="title">
-      <img src="@/assets/logo.png" width="40" height="40" alt />
+      <img src="@/assets/logo.png" width="30" height="30" alt />
       <span>vue-running</span>
     </div>
     <div class="operation">
       <Button type="text" @click="clickhandle('run')">
-        <Icon type="ios-play-outline" class="btn-icon" />
+        <Icon type="md-play" class="btn-icon" />
         <span>运行</span>
       </Button>
       <Button type="text" @click="clickhandle('reset')">
-        <Icon type="ios-refresh" class="btn-icon" />
+        <Icon type="md-refresh" class="btn-icon" />
         <span>重置</span>
+      </Button>
+      <Button type="text" @click="copyhandle($event)">
+        <Icon type="md-copy" class="btn-icon" />
+        <span>复制</span>
       </Button>
     </div>
     <div class="help">
@@ -38,6 +42,9 @@ export default {
   methods: {
     clickhandle(type) {
       this.$emit(type);
+    },
+    copyhandle(event) {
+      this.$emit("copy", event);
     }
   },
   mounted() {}
