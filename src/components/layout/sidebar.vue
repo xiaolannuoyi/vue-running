@@ -1,19 +1,22 @@
 <template>
   <!-- 菜单 -->
-  <div
-    v-click-outside="onClickOutside"
-    class="runside"
-    :style="{
-      left: showMenu ? '0px' : '-200px',
-      animation: animation
-    }"
-  >
-    <run-menu class="runmenu"></run-menu>
-    <div class="menubtn" @click="openMenu">
-      <i
-        :class="[showMenu ? 'el-icon-d-arrow-left' : 'el-icon-d-arrow-right']"
-      ></i>
+  <div>
+    <div class="menubtn open" @click="showMenu = true">
+      <i class="el-icon-d-arrow-right"></i>
     </div>
+
+    <Drawer
+      placement="left"
+      :closable="false"
+      v-model="showMenu"
+      width="200"
+      class-name="drawer"
+    >
+      <run-menu class="runmenu"></run-menu>
+      <div class="menubtn close" @click="showMenu = false">
+        <i class="el-icon-d-arrow-left"></i>
+      </div>
+    </Drawer>
   </div>
 </template>
 <script>
@@ -23,75 +26,46 @@ export default {
   name: "runSidebar",
   data() {
     return {
-      showMenu: false,
-      animationA: "fade-open .5s ease-in-out",
-      animationB: "fade-hide .5s ease-in-out",
-      animation: ""
-      //   showMenu ? animationA : animationB
-      //   showMenu ? animationA : animationB
-      // left: "-200px" //-200 关, 0 开。
+      showMenu: false
     };
   },
-  components: { runMenu },
-  watch: {
-    showMenu(val) {
-      this.animation = !val ? this.animationA : this.animationB;
-    }
-  },
-  methods: {
-    openMenu() {
-      this.showMenu = !this.showMenu;
-    },
-    onClickOutside() {
-      if (this.showMenu) {
-        this.showMenu = !this.showMenu;
-      }
-    }
-  }
+  components: { runMenu }
 };
 </script>
 <style lang="less">
-.runside {
-  position: absolute;
-  top: 0;
-  height: 100vh;
+.menubtn {
   z-index: 999;
-  .runmenu {
-    width: 200px;
-    height: 100vh;
-  }
-  .menubtn {
-    position: absolute;
-    top: calc(50% - 60px);
-    left: 200px;
-    height: 80px;
-    line-height: 80px;
-    font-size: 40px;
-    background-color: #515a6e;
-    color: #fff;
-    width: 40px;
-    border-radius: 0 10px 10px 0;
-    &:hover {
-      color: #1296db;
-      cursor: pointer;
-    }
+  position: absolute;
+  top: calc(50% - 30px);
+  height: 60px;
+  line-height: 60px;
+  font-size: 30px;
+  background-color: #515a6e;
+  color: #fff;
+  width: 30px;
+  border-radius: 0 10px 10px 0;
+  &:hover {
+    color: #1296db;
+    cursor: pointer;
   }
 }
-
-@keyframes fade-open {
-  0% {
-    left: 0px;
-  }
-  100% {
-    left: -200px;
-  }
+.open {
+  left: 0;
 }
-@keyframes fade-hide {
-  0% {
-    left: -200px;
+.close {
+  left: 200px;
+}
+.runmenu {
+  height: 100vh;
+}
+.drawer {
+  .ivu-drawer-body {
+    padding: 0;
   }
-  100% {
-    left: 0px;
+  .ivu-drawer-content {
+    width: 230px;
+    background-color: transparent;
+    box-shadow: none;
   }
 }
 </style>
