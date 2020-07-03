@@ -79,12 +79,14 @@ export default {
     run() {
       this.$refs.runcode.destroyCode();
       this.$refs.runcode.renderCode();
+      this.$Message.success("已运行");
     },
     reset() {
       this.$refs.runcode.destroyCode();
       this.code = this.initcode;
       this.$nextTick(() => {
         this.$refs.runcode.renderCode();
+        this.$Message.success("已重置");
       });
     },
     copy(event) {

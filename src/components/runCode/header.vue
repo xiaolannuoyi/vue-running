@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="title">
-      <img src="@/assets/logo.png" width="30" height="30" alt />
+      <img src="@/assets/logo.png" width="24" height="24" alt />
       <span>vue-running</span>
     </div>
     <div class="operation">
@@ -19,17 +19,27 @@
       </Button>
     </div>
     <div class="help">
-      <Tooltip placement="bottom-end">
-        <div slot="content">
-          <p>当前 iView 版本为 4.2.0</p>
-          <p>当前 Element 版本为 2.13.2</p>
-          <p>可运行.vue 文件</p>
-        </div>
-        <Button type="text">
-          <Icon type="ios-help-circle-outline" class="btn-icon" />
-        </Button>
-      </Tooltip>
+      <Button
+        type="text"
+        to="https://github.com/xiaolannuoyi/vue-running"
+        target="_blank"
+      >
+        <Icon type="logo-github" class="btn-icon" />
+      </Button>
+
+      <Button type="text" @click="showHelp = true">
+        <Icon type="md-help-circle" class="btn-icon" />
+      </Button>
     </div>
+
+    <Modal v-model="showHelp" title="帮助" :footer-hide="true">
+      <p slot="header">
+        <Icon type="md-help-circle" class="help-icon" />
+        <span class="help-title">帮助</span>
+      </p>
+      <Tag type="dot" color="blue">当前 iView 版本为 4.2.0</Tag>
+      <el-tag>当前 Element 版本为 2.13.2</el-tag>
+    </Modal>
   </div>
 </template>
 
@@ -37,7 +47,9 @@
 export default {
   name: "runHeader",
   data() {
-    return {};
+    return {
+      showHelp: false
+    };
   },
   methods: {
     clickhandle(type) {
@@ -68,7 +80,7 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 200px;
+    width: 180px;
     height: 100%;
     vertical-align: middle;
     text-align: left;
@@ -87,11 +99,19 @@ export default {
     font-size: 14px;
   }
   .help {
-    width: 20px;
+    width: 126px;
   }
   .btn-icon {
     font-size: 20px;
     color: #1296db;
   }
+}
+.help-icon {
+  font-size: 20px;
+  color: #1296db;
+  margin-right: 10px;
+}
+.help-title {
+  color: #1296db;
 }
 </style>

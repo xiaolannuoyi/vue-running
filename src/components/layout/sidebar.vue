@@ -9,10 +9,12 @@
       placement="left"
       :closable="false"
       v-model="showMenu"
-      width="200"
+      width="230"
       class-name="drawer"
     >
-      <run-menu class="runmenu"></run-menu>
+      <div class="runmenu-box">
+        <run-menu class="runmenu"></run-menu>
+      </div>
       <div class="menubtn close" @click="showMenu = false">
         <i class="el-icon-d-arrow-left"></i>
       </div>
@@ -56,14 +58,19 @@ export default {
   left: 200px;
 }
 .runmenu {
+  min-height: 100vh;
+}
+.runmenu-box {
   height: 100vh;
+  width: 200px;
+  overflow: auto;
 }
 .drawer {
   .ivu-drawer-body {
     padding: 0;
+    overflow: hidden;
   }
   .ivu-drawer-content {
-    width: 230px;
     background-color: transparent;
     box-shadow: none;
   }
