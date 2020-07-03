@@ -101,7 +101,7 @@ export default {
   watch: {
     $route: {
       handler(val) {
-        let name = val.params.codename;
+        let name = val.params.pathMatch;
         this.code = this.initcode = codeList[name];
         this.runCodeHash = false;
         this.$nextTick(() => {

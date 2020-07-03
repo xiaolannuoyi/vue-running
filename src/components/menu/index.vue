@@ -1,19 +1,18 @@
 <template>
-  <Menu theme="dark" width="200px" :active-name="$route.params.codename">
+  <Menu theme="dark" width="200px" :active-name="$route.params.pathMatch">
     <template v-for="item in menuList">
-      <Submenu v-if="item.children" :key="item.title" :name="item.name">
-        <template slot="title">
-          <Icon type="ios-paper" />{{ item.title }}
-        </template>
-        <MenuItem
-          v-for="child in item.children"
-          :key="child.title"
-          :name="child.name"
-          :to="child.path"
-          >{{ child.title }}
-        </MenuItem>
-      </Submenu>
-      <MenuItem v-else :key="item.title" :name="item.name" :to="item.path">
+      <menu-child
+        v-if="item.children && item.children.length !== 0"
+        :key="item.title"
+        :data="item"
+        :root="root"
+      ></menu-child>
+      <MenuItem
+        v-else
+        :key="item.title"
+        :name="item.name"
+        :to="root + item.name"
+      >
         <Icon type="ios-people" />{{ item.title }}
       </MenuItem>
     </template>
@@ -21,20 +20,24 @@
 </template>
 <script>
 import { menuList } from "@/components/codeList/index.js";
+import menuChild from "./menuChild";
+
 export default {
   name: "runMenu",
+  components: { menuChild },
   data() {
     return {
-      menuList: menuList
+      menuList: menuList,
+      root: "/code/" //路由前缀
     };
   },
   watch: {
     $route() {
-      console.warn(this.$route.params.codename);
+      console.warn(this.$route);
     }
   },
   mounted() {
-    console.warn(this.$route.params.codename);
+    console.warn(this.$route);
   }
 };
 </script>

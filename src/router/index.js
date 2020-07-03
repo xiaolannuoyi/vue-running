@@ -7,10 +7,10 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    redirect: "/template"
+    redirect: "/code/template"
   },
   {
-    path: "/:codename",
+    path: "/code/*",
     name: "vueRunning",
     component: vueRunning
   }

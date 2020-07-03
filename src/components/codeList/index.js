@@ -7,40 +7,54 @@ let menuList = [
     title: "模版"
   }
 ]; //菜单
-let map = new Map();
-files.keys().forEach(key => {
-  // console.warn(key); // ./index.js  ./Element/test.js
-  if (key.indexOf("/") == key.lastIndexOf("/")) {
-    //一级
-    let filename = key.replace(/\.\/(\w*)\.js$/, "$1");
-
-    if (filename !== "index") codeList[filename] = files(key).default;
-    if (filename !== "index" && filename !== "template") {
-      menuList.push({ path: `/${filename}`, name: filename, title: filename });
-    }
-  } else {
-    //二级
-    let filename = key.replace(/\.\/(\w*)\/(\w*)\.js$/, "$1-$2");
-    codeList[filename] = files(key).default;
-
-    if (!map.has(RegExp.$1)) {
-      let index = menuList.length;
-      map.set(RegExp.$1, index);
-      menuList.push({
-        title: RegExp.$1,
-        name: RegExp.$1,
-        children: []
-      });
-    }
-    let obj = {
-      path: `/${filename}`,
-      name: filename,
-      title: RegExp.$2
-    };
-    menuList[map.get(RegExp.$1)].children.push(obj);
+files.keys().forEach(filePath => {
+  // console.warn(filePath); // ./index.js  ./Element/test.js
+  let len = filePath.length;
+  let key = filePath.substr(2, len - 5);
+  // codeList
+  if (key !== "index") codeList[key] = files(filePath).default;
+  // menuList
+  if (key !== "index" && key !== "template") {
+    menulistHandle(key);
   }
 });
-// console.log("codeList", codeList);
-// console.log("menuList", menuList);
+console.log("codeList", codeList);
+console.log("menuList", menuList);
 
+//路由处理
+function menulistHandle(key) {
+  let keyArr = key.split("/");
+
+  let Pointer = menuList;
+
+  for (let i = 0, len = keyArr.length; i < len; i++) {
+    let lastPointer = Pointer;
+
+    let curnode = keyArr[i];
+    //menuList 是否存在
+    for (let menu of menuList) {
+      if (menu.title == curnode) {
+        Pointer = menu.children;
+        break;
+      }
+    }
+
+    if (lastPointer == Pointer) {
+      let name =
+        i === keyArr.length - 1 ? key : keyArr.slice(0, i + 1).join("/") + "/";
+
+      let newNode = {
+        name,
+        title: curnode,
+        children: []
+      };
+      if (i === keyArr.length - 1) {
+        delete newNode.children;
+      }
+
+      Pointer.push(newNode);
+      Pointer = newNode.children;
+    }
+  }
+}
 export { codeList, menuList };
