@@ -2,7 +2,7 @@ const files = require.context("@/components/codeList", true, /\.js$/);
 let codeList = {}; //通过key取值
 //icon
 let iconList = {
-  template: "ivu-icon ivu-icon-logo-vimeo",
+  template: "el-icon-s-home",
   "element/": "el-icon-eleme",
   "iview/": "ivu-icon ivu-icon-logo-vimeo"
 };
@@ -24,8 +24,8 @@ files.keys().forEach(filePath => {
     menulistHandle(key);
   }
 });
-console.log("codeList", codeList);
-console.log("menuList", menuList);
+// console.log("codeList", codeList);
+// console.log("menuList", menuList);
 
 //路由处理->生成菜单
 function menulistHandle(key) {

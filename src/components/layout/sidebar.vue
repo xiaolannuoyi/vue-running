@@ -31,6 +31,13 @@ export default {
       showMenu: false
     };
   },
+  watch: {
+    $route: {
+      handler() {
+        this.showMenu = false;
+      }
+    }
+  },
   components: { runMenu }
 };
 </script>
