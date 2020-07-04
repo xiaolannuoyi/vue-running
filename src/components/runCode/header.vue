@@ -80,7 +80,8 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 180px;
+    flex-shrink: 0;
+    width: 140px;
     height: 100%;
     vertical-align: middle;
     text-align: left;
@@ -99,7 +100,8 @@ export default {
     font-size: 14px;
   }
   .help {
-    width: 126px;
+    width: 104px;
+    flex-shrink: 0;
   }
   .btn-icon {
     font-size: 20px;

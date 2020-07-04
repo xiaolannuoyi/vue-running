@@ -1,14 +1,20 @@
 const files = require.context("@/components/codeList", true, /\.js$/);
 let codeList = {}; //通过key取值
+//icon
+let iconList = {
+  template: "ivu-icon ivu-icon-logo-vimeo",
+  "element/": "el-icon-eleme",
+  "iview/": "ivu-icon ivu-icon-logo-vimeo"
+};
+//菜单
 let menuList = [
   {
     path: "/template",
     name: "template",
     title: "模版"
   }
-]; //菜单
+];
 files.keys().forEach(filePath => {
-  // console.warn(filePath); // ./index.js  ./Element/test.js
   let len = filePath.length;
   let key = filePath.substr(2, len - 5);
   // codeList
@@ -21,7 +27,7 @@ files.keys().forEach(filePath => {
 console.log("codeList", codeList);
 console.log("menuList", menuList);
 
-//路由处理
+//路由处理->生成菜单
 function menulistHandle(key) {
   let keyArr = key.split("/");
 
@@ -32,7 +38,7 @@ function menulistHandle(key) {
 
     let curnode = keyArr[i];
     //menuList 是否存在
-    for (let menu of menuList) {
+    for (let menu of Pointer) {
       if (menu.title == curnode) {
         Pointer = menu.children;
         break;
@@ -57,4 +63,4 @@ function menulistHandle(key) {
     }
   }
 }
-export { codeList, menuList };
+export { codeList, menuList, iconList };

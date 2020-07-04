@@ -1,25 +1,32 @@
 <template>
-  <Menu theme="dark" width="200px" :active-name="$route.params.pathMatch">
+  <Menu
+    theme="dark"
+    width="200px"
+    :active-name="$route.params.codename"
+    :open-names="opennames"
+  >
     <template v-for="item in menuList">
       <menu-child
         v-if="item.children && item.children.length !== 0"
         :key="item.title"
         :data="item"
         :root="root"
+        :iconList="iconList"
       ></menu-child>
       <MenuItem
         v-else
         :key="item.title"
         :name="item.name"
-        :to="root + item.name"
+        :to="root + encodeURIComponent(item.name)"
       >
-        <Icon type="ios-people" />{{ item.title }}
+        <i :class="iconList[item.name]" />
+        {{ item.title }}
       </MenuItem>
     </template>
   </Menu>
 </template>
 <script>
-import { menuList } from "@/components/codeList/index.js";
+import { menuList, iconList } from "@/components/codeList/index.js";
 import menuChild from "./menuChild";
 
 export default {
@@ -28,16 +35,24 @@ export default {
   data() {
     return {
       menuList: menuList,
-      root: "/code/" //路由前缀
+      iconList: iconList,
+      root: "/" //路由前缀
     };
   },
-  watch: {
-    $route() {
-      console.warn(this.$route);
+  computed: {
+    //自动展开
+    opennames() {
+      let arr = this.$route.params.codename.split("/");
+      let result = [];
+      arr.reduce((pre, cur, index) => {
+        let temp = index ? pre + cur + "/" : cur + "/";
+        result.push(temp);
+        return temp;
+      }, "");
+      result.pop();
+      // console.warn(result);
+      return result;
     }
-  },
-  mounted() {
-    console.warn(this.$route);
   }
 };
 </script>

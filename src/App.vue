@@ -1,15 +1,10 @@
 <template>
   <div id="app">
-    <router-view />
-    <side-menu></side-menu>
+    <router-view></router-view>
+    <router-view name="sideMenu"></router-view>
   </div>
 </template>
-<script>
-import sideMenu from "@/components/layout/sidebar";
-export default {
-  components: { sideMenu }
-};
-</script>
+<script></script>
 <style lang="less">
 html,
 body {

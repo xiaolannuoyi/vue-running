@@ -1,18 +1,21 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import vueRunning from "../views/vueRunning.vue";
-
+import sideMenu from "@/components/layout/sidebar";
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    redirect: "/code/template"
+    redirect: "/template"
   },
   {
-    path: "/code/*",
+    path: "/:codename",
     name: "vueRunning",
-    component: vueRunning
+    components: {
+      default: vueRunning,
+      sideMenu
+    }
   }
 ];
 
