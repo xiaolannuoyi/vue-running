@@ -1,7 +1,31 @@
 <template>
   <div class="home">
     <!-- 头部 -->
-    <run-header @run="run" @reset="reset" @copy="copy"></run-header>
+    <run-header>
+      <!-- 标题 -->
+      <template #title>vue-running</template>
+
+      <!-- 操作 -->
+      <template #operation>
+        <Button type="text" @click="run">
+          <Icon type="md-play" class="btn-icon" />
+          <span>运行</span>
+        </Button>
+        <Button type="text" @click="reset">
+          <Icon type="md-refresh" class="btn-icon" />
+          <span>重置</span>
+        </Button>
+        <Button type="text" @click="copyhandle($event)">
+          <Icon type="md-copy" class="btn-icon" />
+          <span>复制</span>
+        </Button>
+        <Button type="text" @click="$router.push('/pages/home')">
+          <Icon type="md-bookmark" class="btn-icon" />
+          <span>vue-pages</span>
+        </Button>
+      </template>
+    </run-header>
+
     <div class="demo-split">
       <Split v-model="split">
         <!-- 代码 -->
@@ -24,7 +48,7 @@
 
 <script>
 // @ is an alias to /src
-import runHeader from "@/components/runCode/header";
+import runHeader from "@/components/layout/header";
 import runCode from "@/components/runCode/runCode";
 //code模版
 import { codeList } from "@/components/codeList/index";
@@ -76,6 +100,9 @@ export default {
     };
   },
   methods: {
+    copyhandle(event) {
+      clip(this.code, event);
+    },
     run() {
       this.$refs.runcode.destroyCode();
       this.$refs.runcode.renderCode();
@@ -88,9 +115,6 @@ export default {
         this.$refs.runcode.renderCode();
         this.$Message.success("已重置");
       });
-    },
-    copy(event) {
-      clip(this.code, event);
     },
     onCmReady(cm) {
       cm.on("keypress", () => {
@@ -119,7 +143,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 .demo-split {
   height: calc(100vh - 51px);
 }
@@ -129,5 +153,9 @@ export default {
 }
 .code {
   white-space: pre-wrap;
+}
+.btn-icon {
+  font-size: 20px;
+  color: #1296db;
 }
 </style>

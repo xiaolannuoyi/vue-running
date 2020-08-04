@@ -1,31 +1,40 @@
-const files = require.context("@/components/codeList", true, /\.js$/);
-let codeList = {}; //通过key取值
+const files = require.context("@/components/pages", true, /\.vue$/);
 //icon
-let iconList = {
-  template: "el-icon-s-home",
+const iconList = {
+  home: "el-icon-s-home",
   "element/": "el-icon-eleme",
   "iview/": "ivu-icon ivu-icon-logo-vimeo"
 };
 //菜单
-let menuList = [
+const menuList = [
   {
-    path: "/template",
-    name: "template",
-    title: "模版"
+    path: "/home",
+    name: "home",
+    title: "home"
   }
 ];
+//所有组件导入
+const modules = {};
+
 files.keys().forEach(filePath => {
   let key = filePath.substring(2, filePath.lastIndexOf("."));
-  // codeList
-  if (key !== "index") codeList[key] = files(filePath).default;
-  // menuList
-  if (key !== "index" && key !== "template") {
+
+  if (key !== "index" && key !== "sidebar") {
+    // menuList
     menulistHandle(key);
+    //modules
+    let temName = filePath
+      .substring(2, filePath.lastIndexOf("."))
+      .replace("/", "-"); //组件名  element-input
+    console.warn("temName", temName);
+    let filemodule = files(filePath).default;
+    modules[temName] = {
+      ...filemodule
+    };
   }
 });
-// console.log("codeList", codeList);
-// console.log("menuList", menuList);
-
+console.log("menuList", menuList);
+console.log("modules", modules);
 //路由处理->生成菜单
 function menulistHandle(key) {
   let keyArr = key.split("/");
@@ -62,4 +71,4 @@ function menulistHandle(key) {
     }
   }
 }
-export { codeList, menuList, iconList };
+export { menuList, iconList, modules };

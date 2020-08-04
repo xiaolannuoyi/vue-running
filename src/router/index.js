@@ -1,20 +1,29 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import vueRunning from "../views/vueRunning.vue";
-import sideMenu from "@/components/layout/sidebar";
+import vueRunning from "@/views/vueRunning.vue";
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    redirect: "/template"
+    redirect: "/runningcode/template"
   },
+  //代码running页
   {
-    path: "/:codename",
+    path: "/runningcode/:codename",
     name: "vueRunning",
     components: {
       default: vueRunning,
-      sideMenu
+      sideMenu: () => import("@/components/codeList/sidebar.vue")
+    }
+  },
+  //其他代码展示页
+  {
+    path: "/pages/:codename",
+    name: "pages",
+    components: {
+      default: () => import("@/components/pages/index.vue"),
+      sideMenu: () => import("@/components/pages/sidebar.vue")
     }
   }
 ];

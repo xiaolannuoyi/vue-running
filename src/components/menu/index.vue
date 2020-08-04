@@ -26,18 +26,24 @@
   </Menu>
 </template>
 <script>
-import { menuList, iconList } from "@/components/codeList/index.js";
 import menuChild from "./menuChild";
 
 export default {
   name: "runMenu",
   components: { menuChild },
-  data() {
-    return {
-      menuList: menuList,
-      iconList: iconList,
-      root: "/" //路由前缀
-    };
+  props: {
+    menuList: {
+      //菜单
+      type: Array
+    },
+    iconList: {
+      //icon
+      type: Object
+    },
+    root: {
+      //前缀
+      type: String
+    }
   },
   computed: {
     //自动展开

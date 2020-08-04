@@ -13,7 +13,12 @@
       class-name="drawer"
     >
       <div class="runmenu-box">
-        <run-menu class="runmenu"></run-menu>
+        <run-menu
+          class="runmenu"
+          :menuList="menuList"
+          :iconList="iconList"
+          :root="root"
+        ></run-menu>
       </div>
       <div class="menubtn close" @click="showMenu = false">
         <i class="el-icon-d-arrow-left"></i>
@@ -30,6 +35,20 @@ export default {
     return {
       showMenu: false
     };
+  },
+  props: {
+    menuList: {
+      //菜单
+      type: Array
+    },
+    iconList: {
+      //icon
+      type: Object
+    },
+    root: {
+      //前缀
+      type: String
+    }
   },
   watch: {
     $route: {

@@ -2,22 +2,14 @@
   <div class="header">
     <div class="title">
       <img src="@/assets/logo.png" width="24" height="24" alt />
-      <span>vue-running</span>
+      <span>
+        <slot name="title">vue-running</slot>
+      </span>
     </div>
     <div class="operation">
-      <Button type="text" @click="clickhandle('run')">
-        <Icon type="md-play" class="btn-icon" />
-        <span>运行</span>
-      </Button>
-      <Button type="text" @click="clickhandle('reset')">
-        <Icon type="md-refresh" class="btn-icon" />
-        <span>重置</span>
-      </Button>
-      <Button type="text" @click="copyhandle($event)">
-        <Icon type="md-copy" class="btn-icon" />
-        <span>复制</span>
-      </Button>
+      <slot name="operation"></slot>
     </div>
+
     <div class="help">
       <Button
         type="text"
@@ -51,14 +43,7 @@ export default {
       showHelp: false
     };
   },
-  methods: {
-    clickhandle(type) {
-      this.$emit(type);
-    },
-    copyhandle(event) {
-      this.$emit("copy", event);
-    }
-  },
+  methods: {},
   mounted() {}
 };
 </script>
