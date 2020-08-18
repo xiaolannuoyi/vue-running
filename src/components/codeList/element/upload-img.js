@@ -1,8 +1,18 @@
 export default `
 <template>
+  <!--  element upload 只传一张图片样式,和表单一起提交  -->
   <div>
+    <el-link
+    href="https://blog.csdn.net/qq_31126175/article/details/102745994"
+    type="primary"
+    target="_blank"
+    >
+      文章地址：element upload 只传一张图片样式,和表单一起提交
+    </el-link>
+
+    <!-- 代码开始 -->
     <el-upload
-          action="https://jsonplaceholder.typicode.com/posts/"
+          action=""
           :class="{ disabled: uploadDisabled }"
           list-type="picture-card"
           :limit="limitcount"
