@@ -12,7 +12,11 @@
       </template>
     </run-header>
 
-    <component :is="activeTem" style="padding:20px"></component>
+    <component
+      :is="activeTem"
+      style="padding:20px"
+      class="page-component"
+    ></component>
   </div>
 </template>
 
@@ -33,5 +37,11 @@ export default {
 .btn-icon {
   font-size: 20px;
   color: #1296db;
+}
+.page-component {
+  position: absolute;
+  top: 50px;
+  height: calc(100% - 50px);
+  width: 100%;
 }
 </style>

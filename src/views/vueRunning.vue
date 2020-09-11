@@ -28,18 +28,24 @@
 
     <div class="demo-split">
       <Split v-model="split">
-        <!-- 代码 -->
-        <codemirror
-          slot="left"
-          class="demo-split-pane"
-          ref="mycodemirror"
-          v-model="code"
-          :options="cmOptions"
-          @ready="onCmReady"
-        ></codemirror>
-        <!-- 展示 -->
+        <div slot="left" class="demo-split-pane">
+          <!-- 代码 -->
+          <codemirror
+            class="left-box"
+            ref="mycodemirror"
+            v-model="code"
+            :options="cmOptions"
+            @ready="onCmReady"
+          ></codemirror>
+        </div>
         <div slot="right" class="demo-split-pane">
-          <run-code v-if="runCodeHash" :code="code" ref="runcode"></run-code>
+          <!-- 展示 -->
+          <run-code
+            class="right-box"
+            v-if="runCodeHash"
+            :code="code"
+            ref="runcode"
+          ></run-code>
         </div>
       </Split>
     </div>
@@ -145,12 +151,17 @@ export default {
 </script>
 <style scoped>
 .demo-split {
-  height: calc(100vh - 51px);
+  position: absolute;
+  top: 50px;
+  height: calc(100% - 50px);
+  width: 100%;
 }
 .demo-split-pane {
   padding: 10px;
   height: 100%;
+  overflow: auto;
 }
+
 .code {
   white-space: pre-wrap;
 }

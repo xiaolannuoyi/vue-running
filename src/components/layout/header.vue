@@ -49,6 +49,10 @@ export default {
 </script>
 <style scoped lang="less">
 .header {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+
   height: 50px;
   line-height: 50px;
   width: 100%;
