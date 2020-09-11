@@ -1,4 +1,3 @@
-export default `
 <template>
   <!-- element Tooltip背景颜色样式修改 -->
   <div>
@@ -28,14 +27,12 @@ export default {
 </script>
 <style>
 .atooltip.el-tooltip__popper[x-placement^="top"] .popper__arrow {
-  border-top-color: pink;
+  border-top-color: pink !important;
 }
 .atooltip.el-tooltip__popper[x-placement^="top"] .popper__arrow:after {
-  border-top-color: pink;
+  border-top-color: pink !important;
 }
 .atooltip {
   background: pink !important;
 }
 </style>
-
-`;
