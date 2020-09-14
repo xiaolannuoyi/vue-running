@@ -63,7 +63,7 @@ export default {
 <style lang="less">
 .menubtn {
   z-index: 999;
-  position: absolute;
+  position: fixed;
   top: calc(50% - 30px);
   height: 60px;
   line-height: 60px;
