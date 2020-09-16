@@ -21,7 +21,9 @@ files.keys().forEach(filePath => {
 
   if (key !== "index" && key !== "sidebar") {
     // menuList
-    menulistHandle(key);
+    if (key !== "messageBoard") {
+      menulistHandle(key);
+    }
     //modules
     let temName = filePath
       .substring(2, filePath.lastIndexOf("."))

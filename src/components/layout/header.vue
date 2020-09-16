@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="header" id="header">
     <div class="title">
       <img src="@/assets/logo.png" width="24" height="24" alt />
       <span>
@@ -8,6 +8,24 @@
     </div>
     <div class="operation">
       <slot name="operation"></slot>
+      <Button type="text">
+        <Icon type="md-pulse" class="btn-icon" />
+        <span
+          id="/vue-running/"
+          class="leancloud_visitors"
+          data-flag-title="vue-running"
+        >
+          <i class="leancloud-visitors-count"></i>
+        </span>
+      </Button>
+      <Button
+        type="text"
+        v-show="$route.path !== '/pages/messageBoard'"
+        @click="$router.push('/pages/messageBoard')"
+      >
+        <Icon type="md-clipboard" class="btn-icon" />
+        <span>留言板</span>
+      </Button>
     </div>
 
     <div class="help">
@@ -36,6 +54,8 @@
 </template>
 
 <script>
+import Valine from "valine";
+
 export default {
   name: "runHeader",
   data() {
@@ -44,7 +64,16 @@ export default {
     };
   },
   methods: {},
-  mounted() {}
+  mounted() {
+    console.log("==", this.$route);
+    new Valine({
+      el: "#vcomment",
+      appId: "K6UuvyAML4KweRWWPxlmfaV9-gzGzoHsz",
+      appKey: "POprE8igjdsavLjd3pB9XRtr",
+      visitor: true, // 阅读量统计
+      avatar: "wavatar"
+    });
+  }
 };
 </script>
 <style scoped lang="less">
