@@ -8,16 +8,7 @@
     </div>
     <div class="operation">
       <slot name="operation"></slot>
-      <Button type="text">
-        <Icon type="md-pulse" class="btn-icon" />
-        <span
-          id="/vue-running/"
-          class="leancloud_visitors"
-          data-flag-title="vue-running"
-        >
-          <i class="leancloud-visitors-count"></i>
-        </span>
-      </Button>
+
       <Button
         type="text"
         v-show="$route.path !== '/pages/messageBoard'"
@@ -26,6 +17,56 @@
         <Icon type="md-clipboard" class="btn-icon" />
         <span>留言板</span>
       </Button>
+      <Tooltip placement="bottom" theme="light">
+        <div slot="content" class="busuanzi">
+          <Button type="text">
+            <Icon type="md-glasses" class="btn-icon" />
+            <!-- 本站总访问量 -->
+            <span id="busuanzi_value_site_pv"></span>
+          </Button>
+          <br />
+          <Button type="text">
+            <Icon type="md-contacts" class="btn-icon" />
+            <!-- 本站访客数 -->
+            <span id="busuanzi_value_site_uv"></span>
+          </Button>
+          <br />
+          <Button type="text">
+            <Icon type="md-book" class="btn-icon" />
+            <!-- 本文总阅读量 -->
+            <span id="busuanzi_value_page_pv"></span>
+          </Button>
+          <br />
+          <Button type="text" size="small">
+            <span>
+              由 <a href="http://busuanzi.ibruce.info/">不蒜子</a> 统计
+            </span>
+          </Button>
+        </div>
+        <Button type="text">
+          <Icon type="md-pulse" class="btn-icon" />
+          <span
+            id="/vue-running/"
+            class="leancloud_visitors"
+            data-flag-title="vue-running"
+          >
+            <i class="leancloud-visitors-count"></i>
+          </span>
+        </Button>
+      </Tooltip>
+
+      <!-- <span id="busuanzi_container_site_pv" style="display:none">
+        本站总访问量
+        <span id="busuanzi_value_site_pv"></span>次
+        <span class="post-meta-divider">|</span>
+      </span>
+      <span id="busuanzi_container_site_uv" style="display:none">
+        本站访客数
+        <span id="busuanzi_value_site_uv"></span>人
+      </span>
+      
+      <Icon type="md-contacts" /> <span id="busuanzi_value_site_uv"></span>
+       <span id="busuanzi_value_site_uv"></span> -->
     </div>
 
     <div class="help">
@@ -54,6 +95,7 @@
 </template>
 
 <script>
+let script;
 import Valine from "valine";
 
 export default {
@@ -65,11 +107,12 @@ export default {
   },
   methods: {},
   mounted() {
-    console.log("==", this.$route);
+    script = require("busuanzi.pure.js");
+    script.fetch();
     new Valine({
       el: "#vcomment",
-      appId: "K6UuvyAML4KweRWWPxlmfaV9-gzGzoHsz",
-      appKey: "POprE8igjdsavLjd3pB9XRtr",
+      appId: "du4lzvLtr3I3ApJhLqJigKwF-MdYXbMMI",
+      appKey: "lvIU21x5tjL80eQf2j8cKevL",
       visitor: true, // 阅读量统计
       avatar: "wavatar"
     });
@@ -133,5 +176,12 @@ export default {
 }
 .help-title {
   color: #1296db;
+}
+.busuanzi {
+  font-family: monospace;
+  span {
+    display: inline-block;
+    margin-left: 5px;
+  }
 }
 </style>

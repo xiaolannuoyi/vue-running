@@ -71,6 +71,17 @@ let iconList = {
 >
 > 所以iview的图标需要这样写`ivu-icon ivu-icon-*******`
 
+
+
+## 留言板功能
+
+* 基于[valine](https://valine.js.org/)添加留言板和访问量统计
+
+* 并引入[不蒜子](http://busuanzi.ibruce.info/)统计
+
+* 并添加邮件提醒功能
+
+
 # 问题记录
 
 * **1.** 路由参数重含有`/`
@@ -103,8 +114,6 @@ created() {
 [github地址](https://github.com/xiaolannuoyi/vue-running)
 
 [在线地址1](https://xiaolannuoyi.github.io/vue-running/)
-
-[在线地址2](http://vue-running.xlny.ltd/vue-running/)
 
 ## Project setup
 ```
