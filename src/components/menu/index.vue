@@ -2,7 +2,7 @@
   <Menu
     theme="dark"
     width="200px"
-    :active-name="$route.params.codename"
+    :active-name="activeName"
     :open-names="opennames"
   >
     <template v-for="item in menuList">
@@ -46,9 +46,13 @@ export default {
     }
   },
   computed: {
+    activeName() {
+      let arr = this.$route.params.codename.replace("%2F", "/");
+      return arr;
+    },
     //自动展开
     opennames() {
-      let arr = this.$route.params.codename.split("/");
+      let arr = this.$route.params.codename.split("%2F");
       let result = [];
       arr.reduce((pre, cur, index) => {
         let temp = index ? pre + cur + "/" : cur + "/";
@@ -56,7 +60,6 @@ export default {
         return temp;
       }, "");
       result.pop();
-      // console.warn(result);
       return result;
     }
   }

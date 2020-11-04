@@ -28,7 +28,7 @@ export default {
   components: { ...modules, runHeader },
   computed: {
     activeTem() {
-      return this.$route.params.codename.replace("/", "-");
+      return this.$route.params.codename.replace("%2F", "-");
     }
   }
 };

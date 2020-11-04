@@ -131,7 +131,7 @@ export default {
   watch: {
     $route: {
       handler(val) {
-        let name = val.params.codename;
+        let name = val.params.codename.replace("%2F", "/");
         this.code = this.initcode = codeList[name] || "";
         this.runCodeHash = false;
         this.$nextTick(() => {
